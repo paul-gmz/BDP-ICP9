@@ -5,7 +5,9 @@ object MergeSort {
     System.setProperty("hadoop.home.dir","C:\\Installations\\Hadoop")
     val conf = new SparkConf().setAppName("MergeSort").setMaster("local[*]")
     val sc = new SparkContext(conf)
-    println(mergeSort(List(38,27,43,3,9,82,10)))
+    val input = List(38,27,43,3,9,82,10)
+    val output = sc.parallelize(Seq(input)).map(mergeSort).collect().toList
+    println(output);
   }
 
   def mergeSort(lst: List[Int]): List[Int] = lst match  {
